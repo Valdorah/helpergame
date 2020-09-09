@@ -2,7 +2,7 @@ import React from 'react';
 
 const SolutionSummary = () => {
   return (
-    <div className="card z-depth-0 solution-summary">
+    <div className="card z-depth-0 solution-summary smoke-effect">
       <div className="card-content grey-text text-darken-3">
         <span className="card-title">Solution Title</span>
         <p>Posted by ...</p>

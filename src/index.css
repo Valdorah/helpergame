@@ -1,13 +1,28 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  min-height: 100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  background: url("/img/pokemon-wallpaper.jpg") no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+  background-color: #2BADE1;
+}
+
+form {
+  margin-top: 10%;
+  padding: 2%;
+}
+
+.smoke-effect {
+  backdrop-filter: saturate(100%) blur(4px);
+  background-color: rgba(255,255,255, 0.6);
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]){
+  border-color: #B71C1C;
+  box-shadow: none;
 }
