@@ -1,12 +1,19 @@
 import React from "react";
 import SolutionSummary from "./SolutionSummary";
 
-const SolutionList = () => {
+const SolutionList = ({ solutions }) => {
+  const solutionList = solutions ?
+    (solutions.map(solution => <SolutionSummary key={solution.id} solution={solution} />))
+    :
+    (
+      <div>
+        <span>Loading...</span>
+      </div>
+    );
+
   return (
     <div className="project-list section">
-      <SolutionSummary />
-      <SolutionSummary />
-      <SolutionSummary />
+      {solutionList}
     </div>
   );
 }

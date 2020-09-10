@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import { createSolution } from "../../store/actions/SolutionActions";
 
 class CreateSolution extends Component {
   state = {
@@ -14,7 +16,7 @@ class CreateSolution extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.createSolution(this.state);
   }
 
   render() {
@@ -39,4 +41,10 @@ class CreateSolution extends Component {
   }
 }
 
-export default CreateSolution;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createSolution: (solution) => dispatch(createSolution(solution))
+  }
+}
+
+export default connect(undefined, mapDispatchToProps)(CreateSolution);
