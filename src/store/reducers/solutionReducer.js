@@ -14,12 +14,14 @@ const solutionReducer = (state = initState, action) => {
       //   ...state,
       //   solutions: [...state.solutions, action.solution]
       // }
-      break;
+      return state;
+    case 'CREATE_SOLUTION_ERROR':
+      console.log(action.error);
+      return state;
   
     default:
-      break;
+      return state;
   }
-  return state;
 }
 
 export default solutionReducer;
