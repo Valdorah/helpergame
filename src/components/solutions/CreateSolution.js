@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { createSolution } from "../../store/actions/SolutionActions";
 
 class CreateSolution extends Component {
@@ -20,6 +21,12 @@ class CreateSolution extends Component {
   }
 
   render() {
+    const { auth } = this.props;
+
+    if (!auth.uid) {
+      return <Redirect to="/signin" />
+    }
+
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="smoke-effect">
@@ -41,10 +48,16 @@ class CreateSolution extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     createSolution: (solution) => dispatch(createSolution(solution))
   }
 }
 
-export default connect(undefined, mapDispatchToProps)(CreateSolution);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateSolution);

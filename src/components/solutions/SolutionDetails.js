@@ -2,9 +2,13 @@ import React from 'react';
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 const SolutionDetails = (props) => {
-  const { solution } = props;
+  const { solution, auth } = props;
+
+  if(!auth.uid) {return <Redirect to="/signin" />}
+
   const solutionDetails = solution ? (
     <div className="container">
       <div className="card z-depth-0 smoke-effect">
@@ -22,7 +26,7 @@ const SolutionDetails = (props) => {
     :
     (
       <div className="container center">
-        <p>Laoding project...</p>
+        <p>Loading project...</p>
       </div>
     )
 
@@ -36,7 +40,8 @@ const mapStateToProps = (state, ownProps) => {
   const solutions = state.firestore.data.solutions;
   const solution = solutions ? solutions[id] : null
   return {
-    solution: solution
+    solution: solution,
+    auth: state.firebase.auth
   }
 }
 

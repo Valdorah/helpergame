@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { signIn } from "../../store/actions/authActions";
 
 class SignIn extends Component {
   state = {
     email: '',
     password: ''
   }
-  
+
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -14,10 +17,16 @@ class SignIn extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.signIn(this.state);
   }
 
-  render(){
+  render() {
+    const {authError, auth} = this.props;
+
+    if(auth.uid) {
+      return <Redirect to="/" />
+    }
+
     return (
       <div className="container">
         <form onSubmit={this.handleSubmit} className="smoke-effect">
@@ -31,7 +40,10 @@ class SignIn extends Component {
             <input id="password" type="password" value={this.state.password} onChange={this.handleChange} />
           </div>
           <div className="input-field">
-            <button type="submit" className="btn red darken-4 z-depth-0">Sing In</button>
+            <button type="submit" className="btn red darken-4 z-depth-0">Sign In</button>
+            <div className="red-text center">
+               {authError ? <p>{authError}</p> : null}
+            </div>
           </div>
         </form>
       </div>
@@ -39,4 +51,17 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+const mapStateToProps = (state) => {
+  return {
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (credentials) => dispatch(signIn(credentials))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

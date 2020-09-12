@@ -4,10 +4,15 @@ import SolutionList from "../solutions/SolutionList";
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {
-    const { solutions } = this.props;
+    const { solutions, auth } = this.props;
+    
+    if(!auth.uid) {
+      return <Redirect to="/signin" />
+    }
 
     return (
       <div className="dashboard container">
@@ -26,7 +31,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    solutions: state.firestore.ordered.solutions
+    solutions: state.firestore.ordered.solutions,
+    auth: state.firebase.auth
   }
 }
 
