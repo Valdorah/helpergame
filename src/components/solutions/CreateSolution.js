@@ -18,6 +18,7 @@ class CreateSolution extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.createSolution(this.state);
+    this.props.history.push('/');
   }
 
   render() {
