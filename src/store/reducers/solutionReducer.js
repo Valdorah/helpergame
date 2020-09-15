@@ -9,14 +9,8 @@ const initState = {
 const solutionReducer = (state = initState, action) => {
   switch (action.type) {
     case 'CREATE_SOLUTION':
-      console.log('created solution', action.solution);
-      // return{
-      //   ...state,
-      //   solutions: [...state.solutions, action.solution]
-      // }
       return state;
     case 'CREATE_SOLUTION_ERROR':
-      console.log(action.error);
       return state;
   
     default:

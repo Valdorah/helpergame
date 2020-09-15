@@ -12,9 +12,6 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 const createNotification = notification => {
   return admin.firestore().collection('notifications')
     .add(notification)
-    .then(doc => {
-      console.log('notification added', doc)
-    })
 }
 
 exports.solutionCreated = functions.firestore
